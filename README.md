@@ -18,7 +18,7 @@ md2ghost .
 Specify a source directory where are located *.md
 
 ```
-md2ghost md_dir
+md2ghost path/to/your_directory
 ```
 
 ## Install
