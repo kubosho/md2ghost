@@ -1,7 +1,7 @@
 md2ghost
 ========
 
-Convert markdown into Ghost posts.
+Convert a markdown files into Ghost posts.
 
 ## Description
 
@@ -9,19 +9,19 @@ Convert markdown into Ghost posts.
 
 ## Usage
 
-Convert a markdown file to Ghost post
+Convert a markdown file to Ghost post:
 
 ```
 md2ghost foobarbaz.md
 ```
 
-Convert *.md to Ghost posts in a current directory.
+Convert *.md to Ghost posts in a current directory:
 
 ```
 md2ghost .
 ```
 
-Specify a source directory where are located *.md
+Specify a source directory where are located *.md:
 
 ```
 md2ghost path/to/your_directory
