@@ -5,6 +5,8 @@ Convert a markdown files into Ghost posts.
 
 ## Description
 
+A tool to convert from Markdown files to Ghost posts didn't until now. So I made this tool a migration the Ghost from Markdown files.
+
 ## Demo
 
 ## Usage
