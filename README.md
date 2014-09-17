@@ -29,6 +29,14 @@ Specify a source directory where are located *.md:
 md2ghost path/to/your_directory
 ```
 
+## Options
+
+Specify an output directory for Ghost posts (default the output is current directory):
+
+```
+md2ghost -o path/to/output_directory path/to/your_directory
+```
+
 ## Install
 
 ```
