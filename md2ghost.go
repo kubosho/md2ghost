@@ -12,7 +12,7 @@ var (
 
 func main() {
 	flag.BoolVar(&flHelp, "h", false, "Print this message and quit")
-	flag.BoolVar(&flHelp, "-help", false, "Print this message and quit")
+	flag.BoolVar(&flHelp, "help", false, "Print this message and quit")
 	flag.Parse()
 
 	if flHelp {
