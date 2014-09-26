@@ -10,6 +10,10 @@ var (
 	flHelp bool
 )
 
+func showHelp() {
+	fmt.Fprintf(os.Stderr, helpText)
+}
+
 func main() {
 	flag.BoolVar(&flHelp, "h", false, "Print this message and quit")
 	flag.BoolVar(&flHelp, "help", false, "Print this message and quit")
@@ -19,10 +23,6 @@ func main() {
 		showHelp()
 		os.Exit(0)
 	}
-}
-
-func showHelp() {
-	fmt.Fprintf(os.Stderr, helpText)
 }
 
 const helpText = `md2ghost - Convert a markdown files into Ghost posts.
