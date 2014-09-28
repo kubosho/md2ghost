@@ -6,23 +6,28 @@ import (
 	"os"
 )
 
-var (
-	flHelp = flag.Bool("help", false, "Print this message and quit")
-)
+const version = "v0.0.1"
 
-func showHelp() {
-	fmt.Fprintf(os.Stderr, helpText)
-}
+var (
+	flHelp    = flag.Bool("help", false, "Print this message and quit")
+	flVersion = flag.Bool("version", false, "Print version information and quit")
+)
 
 func init() {
 	flag.BoolVar(flHelp, "h", false, "Print this message and quit")
+	flag.BoolVar(flVersion, "v", false, "Print version information and quit")
 }
 
 func main() {
 	flag.Parse()
 
 	if *flHelp {
-		showHelp()
+		fmt.Fprintf(os.Stderr, helpText)
+		os.Exit(0)
+	}
+
+	if *flVersion {
+		fmt.Fprintf(os.Stderr, "md2ghost: %s\n", version)
 		os.Exit(0)
 	}
 }
