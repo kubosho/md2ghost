@@ -7,19 +7,21 @@ import (
 )
 
 var (
-	flHelp bool
+	flHelp = flag.Bool("help", false, "Print this message and quit")
 )
 
 func showHelp() {
 	fmt.Fprintf(os.Stderr, helpText)
 }
 
+func init() {
+	flag.BoolVar(flHelp, "h", false, "Print this message and quit")
+}
+
 func main() {
-	flag.BoolVar(&flHelp, "h", false, "Print this message and quit")
-	flag.BoolVar(&flHelp, "help", false, "Print this message and quit")
 	flag.Parse()
 
-	if flHelp {
+	if *flHelp {
 		showHelp()
 		os.Exit(0)
 	}
