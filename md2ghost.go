@@ -21,7 +21,7 @@ func init() {
 func main() {
 	flag.Parse()
 
-	if *flHelp {
+	if *flHelp || flag.NArg() == 0 {
 		fmt.Fprintf(os.Stderr, helpText)
 		os.Exit(0)
 	}
