@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 
 	"github.com/jessevdk/go-flags"
 )
@@ -35,6 +36,22 @@ func main() {
 	if opts.Version {
 		fmt.Fprintf(os.Stderr, "md2ghost: %s\n", version)
 		return
+	}
+
+	if len(args) > 0 {
+		targetDir := "."
+		if len(os.Args) == 2 {
+			targetDir = os.Args[1]
+		}
+		pattern := targetDir + "/*.md"
+		files, err := filepath.Glob(pattern)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			return
+		}
+		for _, file := range files {
+			fmt.Println(file)
+		}
 	}
 }
 
