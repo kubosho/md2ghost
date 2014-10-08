@@ -11,12 +11,6 @@ A tool to convert from Markdown files to Ghost posts didn't until now. So I made
 
 ## Usage
 
-Convert a markdown file to Ghost post:
-
-```
-md2ghost foobarbaz.md
-```
-
 Convert *.md to Ghost posts in a current directory:
 
 ```
