@@ -50,7 +50,12 @@ func main() {
 			return
 		}
 		for _, file := range files {
-			fmt.Println(file)
+			fp, err = os.Open(file)
+			if err != nil {
+				fmt.Fprintln(os.Stderr, err)
+				return
+			}
+			defer fp.Close()
 		}
 	}
 }
