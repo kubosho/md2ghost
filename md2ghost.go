@@ -24,11 +24,10 @@ func main() {
 	p := flags.NewParser(opts, flags.PrintErrors)
 	args, err := p.Parse()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, helpText)
 		return
 	}
 
-	if opts.Help {
+	if opts.Help || (len(args) == 0 && len(os.Args) < 2) {
 		fmt.Fprintf(os.Stderr, helpText)
 		return
 	}
