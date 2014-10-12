@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -37,13 +38,23 @@ func main() {
 		return
 	}
 
-	if len(args) > 0 {
-		targetDir := "."
-		if len(os.Args) == 2 {
-			targetDir = os.Args[1]
-		}
-		pattern := targetDir + "/*.md"
-		files, err := filepath.Glob(pattern)
+	var fp *os.File
+	var pattern string
+
+	// MEMO: args[0] != "" だと panic: runtime error: index out of range
+	if len(args) != 0 {
+		pattern = args[0] + "/*.md"
+	} else {
+		pattern = "." + "/*.md"
+	}
+
+	files, err := filepath.Glob(pattern)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		return
+	}
+	for _, file := range files {
+		fp, err = os.Open(file)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			return
