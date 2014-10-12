@@ -17,7 +17,69 @@ type opts struct {
 	OutDir  string `short:"o" long:"output" description:"Specify an output directory for Ghost posts"`
 }
 
-func init() {
+type GhostJSON struct {
+	Meta struct {
+		ExportedOn float64 `json:"exported_on"`
+		Version    string  `json:"version"`
+	} `json:"meta"`
+	Data struct {
+		Posts []struct {
+			AuthorID        float64     `json:"author_id"`
+			CreatedAt       float64     `json:"created_at"`
+			CreatedBy       float64     `json:"created_by"`
+			Featured        float64     `json:"featured"`
+			HTML            string      `json:"html"`
+			ID              float64     `json:"id"`
+			Image           interface{} `json:"image"`
+			Language        string      `json:"language"`
+			Markdown        string      `json:"markdown"`
+			MetaDescription interface{} `json:"meta_description"`
+			MetaTitle       interface{} `json:"meta_title"`
+			Page            float64     `json:"page"`
+			PublishedAt     float64     `json:"published_at"`
+			PublishedBy     float64     `json:"published_by"`
+			Slug            string      `json:"slug"`
+			Status          string      `json:"status"`
+			Title           string      `json:"title"`
+			UpdatedAt       float64     `json:"updated_at"`
+			UpdatedBy       float64     `json:"updated_by"`
+		} `json:"posts"`
+		PostsTags []struct {
+			PostID float64 `json:"post_id"`
+			TagID  float64 `json:"tag_id"`
+		} `json:"posts_tags"`
+		RolesUsers []struct {
+			RoleID float64 `json:"role_id"`
+			UserID float64 `json:"user_id"`
+		} `json:"roles_users"`
+		Tags []struct {
+			Description string  `json:"description"`
+			ID          float64 `json:"id"`
+			Name        string  `json:"name"`
+			Slug        string  `json:"slug"`
+		} `json:"tags"`
+		Users []struct {
+			Accessibility   interface{} `json:"accessibility"`
+			Bio             interface{} `json:"bio"`
+			Cover           interface{} `json:"cover"`
+			CreatedAt       float64     `json:"created_at"`
+			CreatedBy       float64     `json:"created_by"`
+			Email           string      `json:"email"`
+			ID              float64     `json:"id"`
+			Image           interface{} `json:"image"`
+			Language        string      `json:"language"`
+			LastLogin       interface{} `json:"last_login"`
+			Location        interface{} `json:"location"`
+			MetaDescription interface{} `json:"meta_description"`
+			MetaTitle       interface{} `json:"meta_title"`
+			Name            string      `json:"name"`
+			Slug            string      `json:"slug"`
+			Status          string      `json:"status"`
+			UpdatedAt       float64     `json:"updated_at"`
+			UpdatedBy       float64     `json:"updated_by"`
+			Website         interface{} `json:"website"`
+		} `json:"users"`
+	} `json:"data"`
 }
 
 func main() {
