@@ -48,13 +48,15 @@ func main() {
 			fmt.Fprintln(os.Stderr, err)
 			return
 		}
-		for _, file := range files {
-			fp, err = os.Open(file)
-			if err != nil {
-				fmt.Fprintln(os.Stderr, err)
-				return
-			}
-			defer fp.Close()
+		defer fp.Close()
+
+		scanner := bufio.NewScanner(fp)
+		for scanner.Scan() {
+			fmt.Println(scanner.Text())
+		}
+		if err := scanner.Err(); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			return
 		}
 	}
 }
