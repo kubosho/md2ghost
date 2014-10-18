@@ -86,13 +86,18 @@ type Data struct {
 	} `json:"users"`
 }
 
+func checkError(err error) {
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		return
+	}
+}
+
 func main() {
 	opts := &opts{}
 	p := flags.NewParser(opts, flags.PrintErrors)
 	args, err := p.Parse()
-	if err != nil {
-		return
-	}
+	checkError(err)
 
 	if opts.Help || (len(args) == 0 && len(os.Args) < 2) {
 		fmt.Fprintf(os.Stderr, helpText)
@@ -115,27 +120,7 @@ func main() {
 	}
 
 	files, err := filepath.Glob(pattern)
-	if err != nil {
-		fmt.Fprintln(os.Stderr, err)
-		return
-	}
-	for _, file := range files {
-		fp, err = os.Open(file)
-		if err != nil {
-			fmt.Fprintln(os.Stderr, err)
-			return
-		}
-		defer fp.Close()
-
-		scanner := bufio.NewScanner(fp)
-		for scanner.Scan() {
-			fmt.Println(scanner.Text())
-		}
-		if err := scanner.Err(); err != nil {
-			fmt.Fprintln(os.Stderr, err)
-			return
-		}
-	}
+	checkError(err)
 }
 
 const helpText = `md2ghost - Convert a markdown files into Ghost posts.
