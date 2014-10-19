@@ -28,62 +28,72 @@ type Meta struct {
 }
 
 type Data struct {
-	Posts []struct {
-		AuthorID        int64       `json:"author_id"`
-		CreatedAt       int64       `json:"created_at"`
-		CreatedBy       int64       `json:"created_by"`
-		Featured        int64       `json:"featured"`
-		HTML            string      `json:"html"`
-		ID              int64       `json:"id"`
-		Image           interface{} `json:"image"`
-		Language        string      `json:"language"`
-		Markdown        string      `json:"markdown"`
-		MetaDescription interface{} `json:"meta_description"`
-		MetaTitle       interface{} `json:"meta_title"`
-		Page            int64       `json:"page"`
-		PublishedAt     int64       `json:"published_at"`
-		PublishedBy     int64       `json:"published_by"`
-		Slug            string      `json:"slug"`
-		Status          string      `json:"status"`
-		Title           string      `json:"title"`
-		UpdatedAt       int64       `json:"updated_at"`
-		UpdatedBy       int64       `json:"updated_by"`
-	} `json:"posts"`
-	PostsTags []struct {
-		PostID int64 `json:"post_id"`
-		TagID  int64 `json:"tag_id"`
-	} `json:"posts_tags"`
-	RolesUsers []struct {
-		RoleID int64 `json:"role_id"`
-		UserID int64 `json:"user_id"`
-	} `json:"roles_users"`
-	Tags []struct {
-		Description string `json:"description"`
-		ID          int64  `json:"id"`
-		Name        string `json:"name"`
-		Slug        string `json:"slug"`
-	} `json:"tags"`
-	Users []struct {
-		Accessibility   interface{} `json:"accessibility"`
-		Bio             interface{} `json:"bio"`
-		Cover           interface{} `json:"cover"`
-		CreatedAt       int64       `json:"created_at"`
-		CreatedBy       int64       `json:"created_by"`
-		Email           string      `json:"email"`
-		ID              int64       `json:"id"`
-		Image           interface{} `json:"image"`
-		Language        string      `json:"language"`
-		LastLogin       interface{} `json:"last_login"`
-		Location        interface{} `json:"location"`
-		MetaDescription interface{} `json:"meta_description"`
-		MetaTitle       interface{} `json:"meta_title"`
-		Name            string      `json:"name"`
-		Slug            string      `json:"slug"`
-		Status          string      `json:"status"`
-		UpdatedAt       int64       `json:"updated_at"`
-		UpdatedBy       int64       `json:"updated_by"`
-		Website         interface{} `json:"website"`
-	} `json:"users"`
+	Posts      []Posts      `json:"posts"`
+	PostsTags  []PostsTags  `json:"posts_tags"`
+	RolesUsers []RolesUsers `json:"roles_users"`
+	Tags       []Tags       `json:"tags"`
+	Users      []Users      `json:"users"`
+}
+
+type Posts struct {
+	AuthorID        int64       `json:"author_id"`
+	CreatedAt       int64       `json:"created_at"`
+	CreatedBy       int64       `json:"created_by"`
+	Featured        int64       `json:"featured"`
+	HTML            string      `json:"html"`
+	ID              int64       `json:"id"`
+	Image           interface{} `json:"image"`
+	Language        string      `json:"language"`
+	Markdown        string      `json:"markdown"`
+	MetaDescription interface{} `json:"meta_description"`
+	MetaTitle       interface{} `json:"meta_title"`
+	Page            int64       `json:"page"`
+	PublishedAt     int64       `json:"published_at"`
+	PublishedBy     int64       `json:"published_by"`
+	Slug            string      `json:"slug"`
+	Status          string      `json:"status"`
+	Title           string      `json:"title"`
+	UpdatedAt       int64       `json:"updated_at"`
+	UpdatedBy       int64       `json:"updated_by"`
+}
+
+type PostsTags struct {
+	PostID int64 `json:"post_id"`
+	TagID  int64 `json:"tag_id"`
+}
+
+type RolesUsers struct {
+	RoleID int64 `json:"role_id"`
+	UserID int64 `json:"user_id"`
+}
+
+type Tags struct {
+	Description string `json:"description"`
+	ID          int64  `json:"id"`
+	Name        string `json:"name"`
+	Slug        string `json:"slug"`
+}
+
+type Users struct {
+	Accessibility   interface{} `json:"accessibility"`
+	Bio             interface{} `json:"bio"`
+	Cover           interface{} `json:"cover"`
+	CreatedAt       int64       `json:"created_at"`
+	CreatedBy       int64       `json:"created_by"`
+	Email           string      `json:"email"`
+	ID              int64       `json:"id"`
+	Image           interface{} `json:"image"`
+	Language        string      `json:"language"`
+	LastLogin       interface{} `json:"last_login"`
+	Location        interface{} `json:"location"`
+	MetaDescription interface{} `json:"meta_description"`
+	MetaTitle       interface{} `json:"meta_title"`
+	Name            string      `json:"name"`
+	Slug            string      `json:"slug"`
+	Status          string      `json:"status"`
+	UpdatedAt       int64       `json:"updated_at"`
+	UpdatedBy       int64       `json:"updated_by"`
+	Website         interface{} `json:"website"`
 }
 
 func checkError(err error) {
