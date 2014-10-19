@@ -1,10 +1,12 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
+	"io/ioutil"
 	"os"
 	"path/filepath"
+	"strings"
+	"time"
 
 	"github.com/jessevdk/go-flags"
 )
@@ -103,6 +105,68 @@ func checkError(err error) {
 	}
 }
 
+//func createPostTags() []PostsTags {
+//	[]PostsTags{
+//		PostsTags{
+//			PostID: 1,
+//			TagID:  1,
+//		},
+//		PostsTags{
+//			PostID: 1,
+//			TagID:  1,
+//		},
+//	}
+//}
+
+//func createTags() []Tags {
+//}
+
+func parseFile(file string) {
+	b, err := ioutil.ReadFile(file)
+	checkError(err)
+	content := string(b)
+	lines := strings.Split(content, "\n")
+	if len(lines) > 2 && lines[0] == "---" {
+		var n int
+		var line string
+		for n, line = range lines[1:] {
+			fmt.Fprintln(os.Stdout, line)
+			if line == "---" {
+				break
+			}
+		}
+		content = strings.Join(lines[n+2:], "\n")
+	}
+}
+
+func GenerateJSON(path string, info os.FileInfo, err error) error {
+	pattern := filepath.Join(path, "*.md")
+	files, err := filepath.Glob(pattern)
+	checkError(err)
+
+	for _, file := range files {
+		parseFile(file)
+	}
+
+	data := Data{
+	//		PostsTags: createPostTags(),
+	}
+
+	meta := Meta{
+		ExportedOn: time.Now().Unix(),
+		Version:    "000",
+	}
+
+	ghost := GhostJSON{
+		Meta: meta,
+		Data: data,
+	}
+
+	fmt.Fprintln(os.Stdout, ghost)
+
+	return err
+}
+
 func main() {
 	opts := &opts{}
 	p := flags.NewParser(opts, flags.PrintErrors)
@@ -119,17 +183,17 @@ func main() {
 		return
 	}
 
-	var fp *os.File
-	var pattern string
-
+	var dir string
 	// MEMO: args[0] != "" だと panic: runtime error: index out of range
 	if len(args) != 0 {
-		pattern = args[0] + "/*.md"
+		dir = args[0]
 	} else {
-		pattern = "." + "/*.md"
+		dir = "."
 	}
 
-	files, err := filepath.Glob(pattern)
+	err = filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
+		return GenerateJSON(path, info, err)
+	})
 	checkError(err)
 }
 
