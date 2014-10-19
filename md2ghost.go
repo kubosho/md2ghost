@@ -110,12 +110,12 @@ func main() {
 	checkError(err)
 
 	if opts.Help || (len(args) == 0 && len(os.Args) < 2) {
-		fmt.Fprintf(os.Stderr, helpText)
+		fmt.Fprintf(os.Stdout, helpText)
 		return
 	}
 
 	if opts.Version {
-		fmt.Fprintf(os.Stderr, "md2ghost: %s\n", version)
+		fmt.Fprintf(os.Stdout, "md2ghost: %s\n", version)
 		return
 	}
 
